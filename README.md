@@ -64,4 +64,12 @@ Invoke-TabCmd -Command get -Arguments '"/workbooks/workbook.twb" -f "\\server\sh
 
 
 
-***I assume that ultimately, the right way to do all of this would be to use the REST. Meanwhile, this one does the job. Contibutions are more than welcome.
+
+
+
+
+
+
+
+*** I assume that ultimately, the right way to do all of this would be to use the REST API. Meanwhile, this one does the job.
+*** Contibutions are more than welcome
