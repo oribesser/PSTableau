@@ -16,7 +16,7 @@
 function Invoke-TabCmd
 {
     [CmdletBinding()]
-    param 
+    param
     (
         # The base tabcmd command, such as 'get' or 'refreshextracts' (can be obtained from 'tabcmd.exe help commands')
         [string]$Command,
@@ -25,13 +25,13 @@ function Invoke-TabCmd
         # The tableau site. If not stated, the default site is used
         [string]$Site
     )
-    
+
     if ($Site)
     {
         Write-Verbose "$(Get-Date) [Invoke-TabCmd]   Site parameter is used, updating sessionConfig.Site to $Site"
         $sessionConfig.Site = $Site
     }
-    else 
+    else
     {
         $sessionConfig.Site = ''
     }
@@ -50,7 +50,7 @@ function Invoke-TabCmd
         New-TabSession
     }
 
-    $defaultArgs = '--no-certcheck --no-prompt --no-proxy'  
+    $defaultArgs = '--no-certcheck --no-prompt --no-proxy'
     $runArgs = "$($Command.Trim()) $($Arguments.Trim()) $defaultArgs"
     Write-Verbose "$(Get-Date) [Invoke-TabCmd]   Invoking $tabcmd $runArgs"
     $run = Start-Process -FilePath $tabCmd -ArgumentList $runArgs -Wait -PassThru -NoNewWindow -RedirectStandardOutput $outFileStd -RedirectStandardError $outFileErr
@@ -81,13 +81,13 @@ function Invoke-TabCmd
             else
             {
                 Write-Verbose "$(Get-Date) [Invoke-TabCmd]   Command exited with error after reconnecting, output: $out"
-                Write-Error "Failed to run tabcmd $Command with the argument $AdditionalArgs after reconnecting `n$outErr" -ErrorAction Stop
+                Write-Error "Failed to run tabcmd $Command with the argument $Arguments after reconnecting `n$outErr" -ErrorAction Stop
             }
         }
-        else 
+        else
         {
             Write-Verbose "$(Get-Date) [Invoke-TabCmd]   Command exited with error, output: $out"
-            Write-Error "Failed to run tabcmd $Command with the argument $AdditionalArgs `n$outErr" -ErrorAction Stop
+            Write-Error "Failed to run tabcmd $Command with the argument $Arguments `n$outErr" -ErrorAction Stop
         }
     }
 }
