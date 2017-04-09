@@ -111,10 +111,10 @@ PrivateData = @{
 
     } # End of PSData hashtable
 
-    TabUrl = '' # The tableau server URL
-    TabSite = '' #
+    TabUrl = 'https://tableauserver' # The tableau server URL.
+    TabSite = '' # Leave it like this to default to the default site.
     TabCmd = 'C:\Program Files\Tableau\Tableau Server\10.1\bin\tabcmd.exe' # Path to tabcmd.exe
-    TabUser = '' # The username to authenticate with
+    TabUser = 'username' # The username to authenticate with, must be the same as the username.xml that was pre-created.
 
 } # End of PrivateData hashtable
 
