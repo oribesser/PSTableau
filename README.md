@@ -12,7 +12,7 @@ Its purpose is to provide an easy, secure and consistent way to run it with Powe
 The module requires the following to be prepared before use:
   * Generate a credential file, it must be generated in the context of the same user and the same computer that will run the PowerShell commands:
 ```powershell
-Get-Credetntial | Export-CliXml modulepath\Credential\username.xml
+Get-Credetntial | Export-CliXml \modulepath\Credential\username.xml
 ```
   * In the module manifest's PrivateData section, set the values for:
     * tabcmd.exe path.
