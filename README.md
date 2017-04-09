@@ -60,3 +60,8 @@ Invoke-TabCmd -Command refreshextracts -Argumets '--workbook "A Workbook Name" -
 Invoke tabcmd.exe with the get command
 ```powershell
 Invoke-TabCmd -Command get -Arguments '"/workbooks/workbook.twb" -f "\\server\share\workbook.twbx"'
+
+
+
+
+*** I assume that ultimately, the right way to do all of this would be to use the REST. Meanwhile, this one is doing its job.. ***
