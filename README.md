@@ -52,7 +52,8 @@ PrivateData = @{
 
 
 ## Examples
-Invokes tabcmd.exe with the refreshextracts command and with multiple arguments
+Invokes tabcmd.exe with the refreshextracts command and with multiple arguments.
+Enclose the whole argument line with ''. Enclose tabcmd item names with "".
 ```powershell
-PS C:\> Invoke-TabCmd -Command refreshextracts -Argumets '--workbook "A Workbook Name" --datasource "datasource" --synchronous'
+Invoke-TabCmd -Command refreshextracts -Argumets '--workbook "A Workbook Name" --datasource "datasource" --synchronous'
 ```
