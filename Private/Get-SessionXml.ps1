@@ -10,19 +10,34 @@ function Get-SessionXml
     param
     (
         # Path to tabcmd-session.xml
-        [string]$Path = (Join-Path $env:LOCALAPPDATA 'Tableau\Tabcmd\tabcmd-session.xml')
+        [string]$Path = (Join-Path $env:LOCALAPPDATA 'Tableau\Tabcmd\tabcmd-session.xml'),
+        # Tableau server session timeout in minutes (default is 240)
+        [int]$SessionTimeout = 240
     )
 
-    if ([xml]$xml = Get-Content $Path -ErrorAction SilentlyContinue)
+    $ErrorActionPreference = 'Stop'
+    try
     {
-        @{
-            'Url' = $xml.session.'base-url'
-            'Site' = $xml.session.'site-namespace'
-            'User' = $xml.session.username
+        [xml]$xml = Get-Content $Path
+        [datetime]$sessionTime = $xml.session.'updated-at'
+        if ($sessionTime -gt (Get-Date).AddMinutes(-$SessionTimeout - 1))
+        {
+            Write-Verbose "$(Get-Date) [Get-SessionXml]  $Path session time is within the session timeout - $SessionTimeout minutes"
+            @{
+                'Url' = $xml.session.'base-url'
+                'Site' = $xml.session.'site-namespace'
+                'User' = $xml.session.username
+            }
+        }
+        else
+        {
+            Write-Verbose "$(Get-Date) [Get-SessionXml]  $Path session time is past the session timeout - $SessionTimeout minutes, a new session is required"
+            return
         }
     }
-    else
+    catch
     {
+        Write-Verbose "$(Get-Date) [Get-SessionXml]  Error getting $Path content: $($_.Exception.Message)"
         return
     }
 }
