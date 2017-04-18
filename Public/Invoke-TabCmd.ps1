@@ -46,7 +46,7 @@ function Invoke-TabCmd
     }
     else
     {
-        Write-Verbose "$(Get-Date) [Invoke-TabCmd]   No tabcmd-session.xml was found, Starting a new session"
+        Write-Verbose "$(Get-Date) [Invoke-TabCmd]   No tabcmd-session.xml was found or session is expired, starting a new session"
         New-TabSession
     }
 
